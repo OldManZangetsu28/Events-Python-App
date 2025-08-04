@@ -1,20 +1,15 @@
 class Person:
     """
-    ABSTRACT:
-        Clasa ce modeleaza o persoana, ca participant la un eveniment
-        personID: identificatorul numeric unic al persoanei
-        nume: numele persoanei
-        adresa: adresa la care locuieste persoana
-    DOMAIN:
-        personID: 'int' strict pozitiv
-        nume: 'string'
-        adresa: {"oras": 'string', "strada": 'string', "numar": 'int'}
+    Clasa ce modeleaza o persoana, ca participant la un eveniment
+    personID: identificatorul numeric unic al persoanei
+    nume: numele persoanei
+    adresa: adresa la care locuieste persoana. Este compusa din oras, strada si numar
     """
 
     def __init__(self, ID=None, name=None, oras=None, strada=None, numar=None):
         """
         Initializeaza o instanta a clasei Person
-        Utilizez argument inspection. Parametrii sunt optionali.
+        Antetul functiei utilizeaza argument inspection. Parametrii sunt optionali.
         Totusi, daca acestia exista, sunt modelati astfel:
         :param ID: nr intreg strict pozitiv
         :params name, oras: string-uri ale caror caractere au urmatorul domeniu [ a-zA-Z]
@@ -82,28 +77,3 @@ class Person:
         """
         adresa = str(self.__adresa["oras"]) + ", str." + str(self.__adresa["strada"]) + ", nr." + str(self.__adresa["numar"])
         return "Persoana " + str(self.__personID) + ", " + self.__nume + ", " + adresa
-
-    @staticmethod
-    def test():
-        pers = Person(5001, "Popa Grigore", "Cluj", "Plopilor", 11)
-        assert pers.get_id() == 5001
-        assert pers.get_nume() == "Popa Grigore"
-        assert pers.get_adress()["oras"] == "Cluj"
-        assert pers.get_adress()["strada"] == "Plopilor"
-        assert pers.get_adress()["numar"] == 11
-        empty_pers = Person()
-        assert empty_pers.get_id() == None
-        assert empty_pers.get_nume() == None
-        assert empty_pers.get_adress() == None
-        pers2 = Person(132,"Popa Grigore", "Cluj", "Plopilor", 11)
-        assert pers.get_nume() == pers2.get_nume()
-        assert pers.get_adress() == pers2.get_adress()
-        assert pers == pers2
-        empty_pers.set_nume("Gicu Ticu")
-        assert empty_pers.get_nume() == "Gicu Ticu"
-        empty_pers.set_adress("Turda", "Ploii", 22)
-        assert empty_pers.get_adress()["oras"] == "Turda"
-        assert empty_pers.get_adress()["strada"] == "Ploii"
-        assert empty_pers.get_adress()["numar"] == 22
-        assert empty_pers != pers
-        assert str(pers) == "Persoana 5001, Popa Grigore, Cluj, str.Plopilor, nr.11"

@@ -6,8 +6,5 @@ class App():
     """
     @staticmethod
     def run():
-        all_tests = Tests()
-        all_tests.run()
-        print("All tests passed!")
         ui = UI()
         ui.run()

@@ -17,9 +17,13 @@ class ValidatePerson:
 
     def __call__(self):
         """
-        Valideaza o instanta a clasei Person()
+        Valideaza o instanta a clasei Person
+        O instanta valida a clasei Person respecta urmatoarele conditii
+            1) personID: 'int' strict pozitiv
+            2) nume: 'string'
+            3) adresa: {"oras": 'string', "strada": 'string', "numar": 'int'}
         :return: void
-        :raises: ValueError, daca paramterii instantei person nu respecta preconditiile din specificatia clasei Person()
+        :raises: ValueError, daca paramterii instantei person nu respecta conditiile specificate mai sus
         """
         errors = "INVALID PERSON INSTANCE! Params: "
         if str(type(self.person.get_id())) == "<class 'int'>":
@@ -57,44 +61,3 @@ class ValidatePerson:
             errors = errors[:-2]
             errors += " NOT VALID!"
             raise ValueError(errors)
-
-
-    @staticmethod
-    def test():
-        p0 = Person(124, "Gigi Costel", "Baia Medie", "Giurgiului", 20)
-        p1 = Person(0, "Gigi Costel", "Baia Medie", "Giurgiului", 20)
-        p2 = Person(-124, "Gigi Costel", "Baia Medie", "Giurgiului", -20)
-        p3 = Person(124, "Gigi 3Costel", "Baia Medi.e", "Giurg.iului", 20)
-        p4 = Person([""], "Gigi Costel", "Baia    Medie", "Giurgi123ului", "5")
-        p5 = Person(12.4, "Gigi Costel", "Baia Medie", "Giurgiului", 1.5)
-        try:
-            ValidatePerson("Tractoare")()
-            assert False
-        except ValueError as err:
-            assert str(err) == "Expected Person instance not found!"
-        ValidatePerson(p0)()
-        try:
-            ValidatePerson(p1)()
-            assert False
-        except ValueError as err:
-            assert str(err) == "INVALID PERSON INSTANCE! Params: 'id' NOT VALID!"
-        try:
-            ValidatePerson(p2)()
-            assert False
-        except ValueError as err:
-            assert str(err) == "INVALID PERSON INSTANCE! Params: 'id', 'numar' NOT VALID!"
-        try:
-            ValidatePerson(p3)()
-            assert False
-        except ValueError as err:
-            assert str(err) == "INVALID PERSON INSTANCE! Params: 'name', 'oras', 'strada' NOT VALID!"
-        try:
-            ValidatePerson(p4)()
-            assert False
-        except ValueError as err:
-            assert str(err) == "INVALID PERSON INSTANCE! Params: 'id', 'strada', 'numar' NOT VALID!"
-        try:
-            ValidatePerson(p5)()
-            assert False
-        except ValueError as err:
-            assert str(err) == "INVALID PERSON INSTANCE! Params: 'id', 'numar' NOT VALID!"

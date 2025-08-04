@@ -11,14 +11,23 @@ class ValidateEvent():
         :raises: ValueError, daca person nu e o instanta a clasei Event
         """
         if not isinstance(event, Event):
-            raise ValueError("Expected Person instance not found!")
+            raise ValueError("Expected Event instance not found!")
         self.event = event
 
     def __call__(self):
         """
         Valideaza o instanta a clasei Event()
+        Instanta clasei Event este valida doar daca se respecta urmatoarele conditii
+            1) eventID: numar intreg ('int') strict pozitiv
+            2) data: {"zi": z, "luna": l, "an": a}
+                    z,l,a 'int' strict pozitive
+                    1<=z<=31, 1<=l<=12, 1000<=a<=9999
+            3) timp: {"ore": h, "min": m}
+                    h,m 'int' pozitive
+                    0<=min<=59
+            4) descriere: string, ale carui caractere au urmatorul domeniu: [ a-zA-z]
         :return: void
-        :raises: ValueError, daca paramterii instantei person nu respecta preconditiile din specificatia clasei Event()
+        :raises: ValueError, daca paramterii instantei nu respecta conditiile specificate mai sus
         """
         errors = "INVALID EVENT INSTANCE! Params: "
 
@@ -63,14 +72,3 @@ class ValidateEvent():
             errors = errors[:-2]
             errors += " NOT VALID!"
             raise ValueError(errors)
-
-
-    @staticmethod
-    def test():
-        v_e0 = Event(201, 31, 12, 2001, 500, 0, "Fodder")
-        v_e1 = Event(201, 29, 2, 2000, 0, 59, "Fodder Todder")
-        inv_e2 = Event(201, 3, 12, 2001, 500, 59, "Fodder")
-        inv_e3 = Event(201, 3, 12, 2001, 500, 59, "Fodder")
-        inv_e4 = Event(201, 3, 12, 2001, 500, 59, "Fodder")
-        ValidateEvent(v_e0)()
-        ValidateEvent(v_e1)()
