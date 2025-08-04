@@ -1,1 +1,1 @@
-Everything you need to know lies in Documentatie.odt
+Everything you need to know about the app lies in Documentatie.odt
